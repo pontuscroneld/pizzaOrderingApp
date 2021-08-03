@@ -19,6 +19,7 @@
 		14A0078426B94D9C0083084C /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078326B94D9C0083084C /* Restaurant.swift */; };
 		14A0078726B950570083084C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078626B950570083084C /* Extensions.swift */; };
 		14A0078926B9634B0083084C /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078826B9634B0083084C /* ApiHandler.swift */; };
+		238B2E5220DC762E20C7D4C1 /* Pods_PizzaOrderingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECBE1332ABE3C75667E50C0 /* Pods_PizzaOrderingApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,9 @@
 		14A0078326B94D9C0083084C /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		14A0078626B950570083084C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		14A0078826B9634B0083084C /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
+		5ECBE1332ABE3C75667E50C0 /* Pods_PizzaOrderingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PizzaOrderingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D56D0D6B2A947C73B84AF8A4 /* Pods-PizzaOrderingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PizzaOrderingApp.debug.xcconfig"; path = "Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F35F663DE9114EC4068D2D5A /* Pods-PizzaOrderingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PizzaOrderingApp.release.xcconfig"; path = "Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,17 +48,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				238B2E5220DC762E20C7D4C1 /* Pods_PizzaOrderingApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08FC53B659DD86BDFB695D42 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D56D0D6B2A947C73B84AF8A4 /* Pods-PizzaOrderingApp.debug.xcconfig */,
+				F35F663DE9114EC4068D2D5A /* Pods-PizzaOrderingApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		14A0075326B917C90083084C = {
 			isa = PBXGroup;
 			children = (
 				14A0075E26B917C90083084C /* PizzaOrderingApp */,
 				14A0075D26B917C90083084C /* Products */,
+				08FC53B659DD86BDFB695D42 /* Pods */,
+				F566CD391BA98A804CC0D90D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +144,14 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		F566CD391BA98A804CC0D90D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5ECBE1332ABE3C75667E50C0 /* Pods_PizzaOrderingApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,9 +159,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14A0077026B917CD0083084C /* Build configuration list for PBXNativeTarget "PizzaOrderingApp" */;
 			buildPhases = (
+				55DDD8D6450F032C687D935F /* [CP] Check Pods Manifest.lock */,
 				14A0075826B917C90083084C /* Sources */,
 				14A0075926B917C90083084C /* Frameworks */,
 				14A0075A26B917C90083084C /* Resources */,
+				9D4A8E378DF94DD1C214EB93 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -190,6 +217,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55DDD8D6450F032C687D935F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PizzaOrderingApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D4A8E378DF94DD1C214EB93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14A0075826B917C90083084C /* Sources */ = {
@@ -341,6 +410,7 @@
 		};
 		14A0077126B917CD0083084C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D56D0D6B2A947C73B84AF8A4 /* Pods-PizzaOrderingApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -361,6 +431,7 @@
 		};
 		14A0077226B917CD0083084C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F35F663DE9114EC4068D2D5A /* Pods-PizzaOrderingApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

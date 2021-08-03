@@ -9,7 +9,5 @@ import Foundation
 
 public class ApiHandler {
 
-  func applySnapshot(restaurants: [Restaurant]) {
-
-  }
+  
 }

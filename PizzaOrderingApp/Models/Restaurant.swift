@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Restaurant: Codable {
+struct Restaurant: Codable, Hashable {
 
   var id: Int
   var name: String
