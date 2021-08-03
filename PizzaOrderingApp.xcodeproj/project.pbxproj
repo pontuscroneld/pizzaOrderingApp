@@ -24,6 +24,7 @@
 		14A0076826B917CD0083084C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14A0076B26B917CD0083084C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14A0076D26B917CD0083084C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14A0077326B917F00083084C /* PLANNING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PLANNING.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +64,7 @@
 				14A0076826B917CD0083084C /* Assets.xcassets */,
 				14A0076A26B917CD0083084C /* LaunchScreen.storyboard */,
 				14A0076D26B917CD0083084C /* Info.plist */,
+				14A0077326B917F00083084C /* PLANNING.md */,
 			);
 			path = PizzaOrderingApp;
 			sourceTree = "<group>";
@@ -289,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89DQD8B7D7;
 				INFOPLIST_FILE = PizzaOrderingApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,6 +311,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 89DQD8B7D7;
 				INFOPLIST_FILE = PizzaOrderingApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
