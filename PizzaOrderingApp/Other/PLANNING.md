@@ -3,6 +3,8 @@
 The code challenge is a “Pizza Ordering App” 
 What I need,
 
+Remove Storyboard to try and build the UI programatically
+
 # List View
 • Show a list of pizza restaurants and have the closest to your current location at the top 
 
