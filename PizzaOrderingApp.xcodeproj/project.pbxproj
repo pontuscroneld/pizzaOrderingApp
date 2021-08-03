@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,8 @@
 		14A0078426B94D9C0083084C /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078326B94D9C0083084C /* Restaurant.swift */; };
 		14A0078726B950570083084C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078626B950570083084C /* Extensions.swift */; };
 		14A0078926B9634B0083084C /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078826B9634B0083084C /* ApiHandler.swift */; };
+		14A0078B26B9A76F0083084C /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078A26B9A76F0083084C /* MenuItemCell.swift */; };
+		14A0078D26B9A79C0083084C /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0078C26B9A79C0083084C /* MenuItem.swift */; };
 		238B2E5220DC762E20C7D4C1 /* Pods_PizzaOrderingApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECBE1332ABE3C75667E50C0 /* Pods_PizzaOrderingApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,8 @@
 		14A0078326B94D9C0083084C /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		14A0078626B950570083084C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		14A0078826B9634B0083084C /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
+		14A0078A26B9A76F0083084C /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		14A0078C26B9A79C0083084C /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		5ECBE1332ABE3C75667E50C0 /* Pods_PizzaOrderingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PizzaOrderingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D56D0D6B2A947C73B84AF8A4 /* Pods-PizzaOrderingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PizzaOrderingApp.debug.xcconfig"; path = "Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F35F663DE9114EC4068D2D5A /* Pods-PizzaOrderingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PizzaOrderingApp.release.xcconfig"; path = "Target Support Files/Pods-PizzaOrderingApp/Pods-PizzaOrderingApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -61,7 +65,6 @@
 				D56D0D6B2A947C73B84AF8A4 /* Pods-PizzaOrderingApp.debug.xcconfig */,
 				F35F663DE9114EC4068D2D5A /* Pods-PizzaOrderingApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -102,6 +105,7 @@
 			children = (
 				14A0078326B94D9C0083084C /* Restaurant.swift */,
 				14A0078826B9634B0083084C /* ApiHandler.swift */,
+				14A0078C26B9A79C0083084C /* MenuItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +135,7 @@
 			children = (
 				14A0077A26B94C610083084C /* SelfConfiguringCell.swift */,
 				14A0077C26B94CCF0083084C /* RestaurantListCell.swift */,
+				14A0078A26B9A76F0083084C /* MenuItemCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -267,12 +272,14 @@
 			files = (
 				14A0077526B948CC0083084C /* DetailView.swift in Sources */,
 				14A0078726B950570083084C /* Extensions.swift in Sources */,
+				14A0078B26B9A76F0083084C /* MenuItemCell.swift in Sources */,
 				14A0077D26B94CCF0083084C /* RestaurantListCell.swift in Sources */,
 				14A0077926B94C110083084C /* ListView.swift in Sources */,
 				14A0076026B917C90083084C /* AppDelegate.swift in Sources */,
 				14A0078426B94D9C0083084C /* Restaurant.swift in Sources */,
 				14A0076226B917C90083084C /* SceneDelegate.swift in Sources */,
 				14A0078926B9634B0083084C /* ApiHandler.swift in Sources */,
+				14A0078D26B9A79C0083084C /* MenuItem.swift in Sources */,
 				14A0077726B948E00083084C /* OrderView.swift in Sources */,
 				14A0077B26B94C610083084C /* SelfConfiguringCell.swift in Sources */,
 			);

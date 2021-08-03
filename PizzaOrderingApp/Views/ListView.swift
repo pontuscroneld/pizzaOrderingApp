@@ -53,10 +53,13 @@ extension ListView: UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       guard let chosenRestaurant = dataSource.itemIdentifier(for: indexPath) else { return }
       print(chosenRestaurant.name)
+      var nextVC = DetailView()
+      nextVC.currentRestaurant = chosenRestaurant
+      self.navigationController?.pushViewController(nextVC, animated: true)
     }
 
   func createLayout() -> UICollectionViewLayout {
-
+    print("Create layout")
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
@@ -69,6 +72,7 @@ extension ListView: UICollectionViewDelegate  {
   }
 
   func configureCollectionViewLayout() {
+    print("Config layout")
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
     collectionView.delegate = self
     collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -78,6 +82,7 @@ extension ListView: UICollectionViewDelegate  {
   }
 
   func configureCollectionViewDataSource() {
+    print("Config data source")
     dataSource = DataSource(
       collectionView: collectionView,
       cellProvider: { (collectionView, indexPath, restaurant) -> RestaurantListCell? in
@@ -97,14 +102,15 @@ extension ListView: UICollectionViewDelegate  {
               name: "Unknown Restaurant",
               address1: "",
               address2: "",
-              latitude: 0.0,
-              longitude: 0.0)
+              latitude: Double(i),
+              longitude: Double(i))
           )
       }
     return dummyData
   }
 
   func applySnapshot(restaurants: [Restaurant]) {
+    print("APPLY SNAPSHOT")
     snapshot = DataSourceSnapShot()
     snapshot.appendSections([Section.main])
     snapshot.appendItems(restaurants)

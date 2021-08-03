@@ -109,10 +109,6 @@ RESTAURANTMODEL:
  "latitude": 59.336078,
  "longitude": 18.071807
  
- MENUMODEL:
- 
- [ MenuItem ] 
- 
  MENUITEM:
  
  {
