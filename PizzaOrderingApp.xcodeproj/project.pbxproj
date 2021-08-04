@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		148F276E26BA89530051AFF0 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148F276D26BA89530051AFF0 /* Cart.swift */; };
 		14A0076026B917C90083084C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0075F26B917C90083084C /* AppDelegate.swift */; };
 		14A0076226B917C90083084C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A0076126B917C90083084C /* SceneDelegate.swift */; };
 		14A0076926B917CD0083084C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14A0076826B917CD0083084C /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		148F276D26BA89530051AFF0 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		14A0075C26B917C90083084C /* PizzaOrderingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaOrderingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A0075F26B917C90083084C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14A0076126B917C90083084C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				14A0078326B94D9C0083084C /* Restaurant.swift */,
 				14A0078826B9634B0083084C /* ApiHandler.swift */,
 				14A0078C26B9A79C0083084C /* MenuItem.swift */,
+				148F276D26BA89530051AFF0 /* Cart.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				14A0077526B948CC0083084C /* DetailView.swift in Sources */,
 				14A0078726B950570083084C /* Extensions.swift in Sources */,
 				14A0078B26B9A76F0083084C /* MenuItemCell.swift in Sources */,
+				148F276E26BA89530051AFF0 /* Cart.swift in Sources */,
 				14A0077D26B94CCF0083084C /* RestaurantListCell.swift in Sources */,
 				14A0077926B94C110083084C /* ListView.swift in Sources */,
 				14A0076026B917C90083084C /* AppDelegate.swift in Sources */,

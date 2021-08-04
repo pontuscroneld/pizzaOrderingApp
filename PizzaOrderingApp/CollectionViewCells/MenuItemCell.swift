@@ -27,8 +27,16 @@ class MenuItemCell: UICollectionViewCell, SelfConfiguringCell {
       return label
   }()
 
+  lazy var priceLabel: UILabel = {
+      let label = UILabel()
+      label.font = .systemFont(ofSize: 22)
+      label.textColor = .secondaryLabel
+      return label
+  }()
+
   func configure(with item: MenuItem) {
     nameLabel.text = item.name
+    priceLabel.text = String(item.price) + ":-"
 
     setupView()
   }
@@ -39,8 +47,11 @@ class MenuItemCell: UICollectionViewCell, SelfConfiguringCell {
     layer.cornerRadius = 8
     clipsToBounds = true
     addSubview(nameLabel)
+    addSubview(priceLabel)
 
-    nameLabel.edgesToSuperview(insets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 8))
+    nameLabel.edgesToSuperview(excluding: .trailing, insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+    priceLabel.leadingToTrailing(of: nameLabel, offset: 8)
+    priceLabel.centerY(to: nameLabel)
   }
 }
 
