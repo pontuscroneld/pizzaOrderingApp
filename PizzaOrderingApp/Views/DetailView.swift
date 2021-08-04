@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TinyConstraints
 
 final class DetailView: UIViewController {
 
@@ -22,6 +23,20 @@ final class DetailView: UIViewController {
 
   var cart: [CartItem] = []
 
+  lazy var orderButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Order", for: .normal)
+    button.backgroundColor = .systemBlue
+    button.tintColor = .white
+    button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+  }()
+
+  let infoButton = UIButton(type: UIButton.ButtonType.system) as! UIButton
+
+  
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,8 +46,23 @@ final class DetailView: UIViewController {
       configureCollectionViewLayout()
       configureCollectionViewDataSource()
       downloadMenu(id: currentRestaurant?.id ?? 0)
-        // Do any additional setup after loading the view.
+
+      let newView = UIView()
+         newView.backgroundColor = UIColor.red
+
+         view.addSubview(newView)
+
+         newView.translatesAutoresizingMaskIntoConstraints = false//compulsory
+         newView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+         newView.topAnchor.constraint(equalTo: collectionView.bottomAnchor).isActive = true
+         newView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+         newView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
     }
+
+  @objc func buttonAction(sender: UIButton!){
+    print("pressed button")
+  }
 
   func downloadMenu(id: Int){
     self.apiHandler?.loadMenu(id: id) { [weak self] result in
