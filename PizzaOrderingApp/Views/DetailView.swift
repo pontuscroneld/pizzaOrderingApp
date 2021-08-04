@@ -102,7 +102,7 @@ final class DetailView: UIViewController {
         var dummyData: [MenuItem] = []
         for i in 0..<3 {
             dummyData.append(
-              MenuItem(id: i, category: "?", name: "?", topping: ["?"], price: 0, rank: i)
+              MenuItem(id: i, category: "?", name: "?", price: 0, rank: i)
             )
         }
       return dummyData

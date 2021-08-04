@@ -47,6 +47,12 @@ class ApiHandler {
         print(error ?? "Error downloading menu")
         completionHandler(.failure(ApiError.downloadFailed))
       }
+
+      let response = try! JSONDecoder().decode([MenuItem].self, from: data!)
+      for item in response {
+        print(item.name)
+        self.downloadedMenuItems.append(item)
+      }
       completionHandler(.success(self.downloadedMenuItems))
     }
     task.resume()
