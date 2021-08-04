@@ -20,6 +20,8 @@ final class DetailView: UIViewController {
   var apiHandler: ApiHandler?
   var collectionView: UICollectionView! = nil
 
+  var cart: [CartItem] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,8 +30,6 @@ final class DetailView: UIViewController {
       apiHandler = ApiHandler()
       configureCollectionViewLayout()
       configureCollectionViewDataSource()
-
-      
       downloadMenu(id: currentRestaurant?.id ?? 0)
         // Do any additional setup after loading the view.
     }
@@ -61,10 +61,20 @@ final class DetailView: UIViewController {
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let chosenItem = dataSource.itemIdentifier(for: indexPath) else { return }
         print(chosenItem.name)
+        var itemToCart = CartItem(menuItemId: chosenItem.id, quantity: 1)
+        for item in cart {
+          if item.menuItemId == chosenItem.id {
+            itemToCart.quantity = item.quantity + 1
+            cart.removeAll { CartItem in
+              CartItem.menuItemId == chosenItem.id
+            }
+          }
+        }
+        cart.append(itemToCart)
+        print(cart)
       }
 
     func createLayout() -> UICollectionViewLayout {
-      print("Create layout")
       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
       let item = NSCollectionLayoutItem(layoutSize: itemSize)
       item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
@@ -77,7 +87,6 @@ final class DetailView: UIViewController {
     }
 
     func configureCollectionViewLayout() {
-      print("Config layout")
       collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
       collectionView.delegate = self
       collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -87,7 +96,6 @@ final class DetailView: UIViewController {
     }
 
     func configureCollectionViewDataSource() {
-      print("Config data source")
       dataSource = DataSource(
         collectionView: collectionView,
         cellProvider: { (collectionView, indexPath, item) -> MenuItemCell? in
