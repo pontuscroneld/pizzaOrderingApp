@@ -20,9 +20,11 @@ final class DetailView: UIViewController {
   var apiHandler: ApiHandler?
   var collectionView: UICollectionView! = nil
   var cart: [CartItem] = []
+  var readableCart: [ReadableCartItem] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    print("OPENED DETAILVIEW")
 
     navigationItem.title = currentRestaurant?.name
     apiHandler = ApiHandler()
@@ -33,6 +35,12 @@ final class DetailView: UIViewController {
 
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    cart = []
+    readableCart = []
+    navigationItem.rightBarButtonItem?.isEnabled = false
+  }
+
   @objc func order(sender: UIButton!){
     if cart.isEmpty {
       return
@@ -40,6 +48,7 @@ final class DetailView: UIViewController {
       print(cart)
       var nextVC = OrderView()
       nextVC.cart = cart
+      nextVC.readableCart = readableCart
       nextVC.currentRestaurant = currentRestaurant
       self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -82,6 +91,7 @@ extension DetailView: UICollectionViewDelegate  {
     guard let chosenItem = dataSource.itemIdentifier(for: indexPath) else { return }
     print(chosenItem.name)
     var itemToCart = CartItem(menuItemId: chosenItem.id, quantity: 1)
+    var readableToCart = ReadableCartItem(name: chosenItem.name, quantity: 1)
     for item in cart {
       if item.menuItemId == chosenItem.id {
         itemToCart.quantity = item.quantity + 1
@@ -90,11 +100,19 @@ extension DetailView: UICollectionViewDelegate  {
         }
       }
     }
+    for item in readableCart {
+      if item.name == chosenItem.name {
+        readableToCart.quantity = item.quantity + 1
+        readableCart.removeAll { ReadableCartItem in
+          ReadableCartItem.name == chosenItem.name
+        }
+      }
+    }
     cart.append(itemToCart)
+    readableCart.append(readableToCart)
     navigationItem.rightBarButtonItem?.isEnabled = true
-    print(cart)
+    print(readableCart)
   }
-
 
   func configureCollectionViewLayout() {
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())

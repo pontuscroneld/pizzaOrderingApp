@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Cart: Codable {
-  var cart: [CartItem] = []
+struct ReadableCartItem {
+  var name: String
+  var quantity: Int
 }
 
 struct CartItem: Codable {
