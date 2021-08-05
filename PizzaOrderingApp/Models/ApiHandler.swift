@@ -11,6 +11,8 @@ class ApiHandler {
 
   typealias RestaurantHandler = (Result<[Restaurant], ApiError>) -> Void
   typealias MenuHandler = (Result<[MenuItem], ApiError>) -> Void
+  typealias OrderHandler = (Result<OrderState, ApiError>) -> Void
+
   var downloadedRestaurants: [Restaurant] = []
   var downloadedMenuItems: [MenuItem] = []
 
@@ -58,7 +60,7 @@ class ApiHandler {
     task.resume()
   }
 
-  func placeOrder(restaurantId: Int, cart: [CartItem]){
+  func placeOrder(restaurantId: Int, cart: [CartItem], completionHandler: @escaping OrderHandler){
 
     var jsonDicts: [[String: Any]] = [[:]]
 
@@ -93,11 +95,14 @@ class ApiHandler {
         print(response)
         if let data = data, let body = String(data: data, encoding: .utf8) {
           print(body)
-          print("SUCCESS")
         }
       } else {
-        print(error ?? "Unknown error")
+        print(error ?? "Error placing order")
+        completionHandler(.failure(ApiError.orderFailed))
       }
+
+      let response = try! JSONDecoder().decode(OrderState.self, from: data!)
+      completionHandler(.success(response))
     }
     task.resume()
 
@@ -106,4 +111,5 @@ class ApiHandler {
 
 enum ApiError: Error {
   case downloadFailed
+  case orderFailed
 }

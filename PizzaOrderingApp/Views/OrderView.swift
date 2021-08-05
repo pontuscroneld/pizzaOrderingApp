@@ -95,11 +95,48 @@ class OrderView: UIViewController {
     ])
   }
 
+  func showOrderState(state: OrderState){
+
+    var newLabel = UILabel()
+    newLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+    newLabel.translatesAutoresizingMaskIntoConstraints = false
+    newLabel.font = .systemFont(ofSize: 14)
+    newLabel.tintColor = .label
+    newLabel.numberOfLines = .max
+    newLabel.text = """
+        OrderID: \(state.orderId)
+        Sum: \(state.totalPrice)kr
+        Time: \(state.orderedAt)
+        ETA: \(state.esitmatedDelivery)
+        Status: \(state.status)
+        """
+    view.addSubview(newLabel)
+
+    NSLayoutConstraint.activate([
+      newLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
+      newLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+      newLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+      newLabel.heightAnchor.constraint(equalToConstant: 300),
+      newLabel.widthAnchor.constraint(equalToConstant: 100)
+
+    ])
+  }
+
   @objc func placeOrder(){
     print("PRESSED ORDER")
     guard let cart = cart else { return }
     guard let res = currentRestaurant else { return }
-    apiHandler?.placeOrder(restaurantId: res.id, cart: cart)
+    apiHandler?.placeOrder(restaurantId: res.id, cart: cart) { [weak self] result in
+      DispatchQueue.main.async {
+        switch result {
+        case let .success(orderState):
+          print("Success in placing order")
+          self!.showOrderState(state: orderState)
+        case .failure(_):
+          print("Error placing order")
+        }
+      }
+    }
   }
 
   @objc func resetCart(){
