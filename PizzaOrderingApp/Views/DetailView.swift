@@ -34,15 +34,24 @@ final class DetailView: UIViewController {
   }
 
   @objc func order(sender: UIButton!){
-    print("pressed button")
+    if cart.isEmpty {
+      return
+    } else {
+      print(cart)
+      var nextVC = OrderView()
+      nextVC.cart = cart
+      nextVC.currentRestaurant = currentRestaurant
+      self.navigationController?.pushViewController(nextVC, animated: true)
+    }
   }
 
   func addBarButton(){
-    let button: UIButton = UIButton(type: .custom) as! UIButton
+    let button: UIButton = UIButton(type: .custom) 
     button.setImage(UIImage(systemName: "cart.fill"), for: .normal)
     button.addTarget(self, action: #selector(order), for: .touchUpInside)
     let barButton = UIBarButtonItem(customView: button)
     self.navigationItem.rightBarButtonItem = barButton
+    self.navigationItem.rightBarButtonItem?.isEnabled = false
   }
 
   func downloadMenu(id: Int){
@@ -82,8 +91,21 @@ extension DetailView: UICollectionViewDelegate  {
       }
     }
     cart.append(itemToCart)
+    navigationItem.rightBarButtonItem?.isEnabled = true
     print(cart)
   }
+
+
+  func configureCollectionViewLayout() {
+    collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+    collectionView.delegate = self
+    collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    collectionView.backgroundColor = .systemBackground
+    collectionView.register(MenuItemCell.self, forCellWithReuseIdentifier: MenuItemCell.reuseIdentifier)
+    view.addSubview(collectionView)
+  }
+
+
 
   func createLayout() -> UICollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -97,14 +119,6 @@ extension DetailView: UICollectionViewDelegate  {
     return layout
   }
 
-  func configureCollectionViewLayout() {
-    collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-    collectionView.delegate = self
-    collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    collectionView.backgroundColor = .systemBackground
-    collectionView.register(MenuItemCell.self, forCellWithReuseIdentifier: MenuItemCell.reuseIdentifier)
-    view.addSubview(collectionView)
-  }
 
   func configureCollectionViewDataSource() {
     dataSource = DataSource(
@@ -117,6 +131,14 @@ extension DetailView: UICollectionViewDelegate  {
       })
   }
 
+  func applySnapshot(items: [MenuItem]) {
+    print("APPLY SNAPSHOT")
+    snapshot = DataSourceSnapShot()
+    snapshot.appendSections([Section.main])
+    snapshot.appendItems(items)
+    dataSource.apply(snapshot)
+  }
+
   func createDummyData() -> [MenuItem] {
     var dummyData: [MenuItem] = []
     for i in 0..<3 {
@@ -125,13 +147,5 @@ extension DetailView: UICollectionViewDelegate  {
       )
     }
     return dummyData
-  }
-
-  func applySnapshot(items: [MenuItem]) {
-    print("APPLY SNAPSHOT")
-    snapshot = DataSourceSnapShot()
-    snapshot.appendSections([Section.main])
-    snapshot.appendItems(items)
-    dataSource.apply(snapshot)
   }
 }

@@ -81,10 +81,3 @@ class MenuItemCell: UICollectionViewCell, SelfConfiguringCell {
 //    plusButton.centerY(to: nameLabel)
   }
 }
-
-//var id: Int
-//var category: String
-//var name: String
-//var topping: [String]
-//var price: Int
-//var rank: Int
