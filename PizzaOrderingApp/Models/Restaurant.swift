@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Restaurant: Codable, Hashable {
 
@@ -15,5 +16,9 @@ struct Restaurant: Codable, Hashable {
   var address2: String
   var latitude: Double
   var longitude: Double
+
+  func distance(to location: CLLocation) -> CLLocationDistance {
+    return location.distance(from: CLLocation(latitude: self.latitude, longitude: self.longitude))
+      }
 
 }
