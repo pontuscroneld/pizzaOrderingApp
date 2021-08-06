@@ -69,15 +69,9 @@ class MenuItemCell: UICollectionViewCell, SelfConfiguringCell {
     clipsToBounds = true
     addSubview(nameLabel)
     addSubview(priceLabel)
-//    addSubview(plusButton)
-//    addSubview(minusButton)
 
     nameLabel.edgesToSuperview(excluding: .trailing, insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     priceLabel.leadingToTrailing(of: nameLabel, offset: 8)
-//    minusButton.leadingToTrailing(of: priceLabel, offset: 40)
-//    plusButton.leadingToTrailing(of: minusButton, offset: 8)
     priceLabel.centerY(to: nameLabel)
-//    minusButton.centerY(to: nameLabel)
-//    plusButton.centerY(to: nameLabel)
   }
 }

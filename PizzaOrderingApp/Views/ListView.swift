@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ListView: UIViewController {
 
@@ -14,22 +15,29 @@ class ListView: UIViewController {
 
   var dataSource: DataSource!
   var snapshot = DataSourceSnapShot()
+  var userLocation: CLLocation?
 
+  var locationManager: CLLocationManager?
   var apiHandler: ApiHandler?
   var collectionView: UICollectionView! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
       navigationItem.title = "Pizza places"
-
-      apiHandler = ApiHandler()
-      configureCollectionViewLayout()
-      configureCollectionViewDataSource()
-      downloadRestaurants()
+      findLocation()
     }
 
+  func goConfigure(){
+    apiHandler = ApiHandler()
+    configureCollectionViewLayout()
+    configureCollectionViewDataSource()
+    downloadRestaurants()
+  }
+
   func downloadRestaurants(){
+    guard let userLocation = userLocation else { return }
+    apiHandler?.userLocation = userLocation
     self.apiHandler?.loadRestaurants() { [weak self] result in
       DispatchQueue.main.async {
           switch result {
@@ -41,22 +49,56 @@ class ListView: UIViewController {
       }
     }
   }
+
+  func findLocation(){
+    locationManager = CLLocationManager()
+    locationManager?.delegate = self
+    locationManager?.requestWhenInUseAuthorization()
+  }
 }
 
-// MARK: - Collection View Delegate
-extension ListView: UICollectionViewDelegate  {
+// MARK: - Collection View, Location Delegate
+extension ListView: UICollectionViewDelegate, CLLocationManagerDelegate {
 
   enum Section {
-      case main
+    case main
   }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      guard let chosenRestaurant = dataSource.itemIdentifier(for: indexPath) else { return }
-      print(chosenRestaurant.name)
-      var nextVC = DetailView()
-      nextVC.currentRestaurant = chosenRestaurant
-      self.navigationController?.pushViewController(nextVC, animated: true)
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    if status == .authorizedWhenInUse {
+      locationManager?.requestLocation()
     }
+  }
+
+  func locationManager(
+    _ manager: CLLocationManager,
+    didUpdateLocations locations: [CLLocation]
+  ) {
+    if let location = locations.first {
+      let latitude = location.coordinate.latitude
+      let longitude = location.coordinate.longitude
+      userLocation = CLLocation(latitude: latitude, longitude: longitude)
+      print(userLocation)
+      goConfigure()
+    }
+  }
+
+  func locationManager(
+    _ manager: CLLocationManager,
+    didFailWithError error: Error
+  ) {
+    print("Could not find user location. Assigning location to preset coordinates.")
+    userLocation = CLLocation(latitude: 59.192340, longitude: 18.031080)
+    goConfigure()
+  }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard let chosenRestaurant = dataSource.itemIdentifier(for: indexPath) else { return }
+    print(chosenRestaurant.name)
+    var nextVC = DetailView()
+    nextVC.currentRestaurant = chosenRestaurant
+    self.navigationController?.pushViewController(nextVC, animated: true)
+  }
 
   func createLayout() -> UICollectionViewLayout {
     print("Create layout")
@@ -94,18 +136,18 @@ extension ListView: UICollectionViewDelegate  {
   }
 
   func createDummyData() -> [Restaurant] {
-      var dummyData: [Restaurant] = []
-      for i in 0..<3 {
-          dummyData.append(
-            Restaurant(
-              id: i,
-              name: "Unknown Restaurant",
-              address1: "",
-              address2: "",
-              latitude: Double(i),
-              longitude: Double(i))
-          )
-      }
+    var dummyData: [Restaurant] = []
+    for i in 0..<3 {
+      dummyData.append(
+        Restaurant(
+          id: i,
+          name: "Unknown Restaurant",
+          address1: "",
+          address2: "",
+          latitude: Double(i),
+          longitude: Double(i))
+      )
+    }
     return dummyData
   }
 

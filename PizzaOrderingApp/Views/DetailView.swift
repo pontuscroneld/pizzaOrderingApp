@@ -39,6 +39,10 @@ final class DetailView: UIViewController {
     cart = []
     readableCart = []
     navigationItem.rightBarButtonItem?.isEnabled = false
+
+    for cell in collectionView.visibleCells {
+      cell.backgroundColor = .systemBlue
+    }
   }
 
   @objc func order(sender: UIButton!){
@@ -111,6 +115,7 @@ extension DetailView: UICollectionViewDelegate  {
     cart.append(itemToCart)
     readableCart.append(readableToCart)
     navigationItem.rightBarButtonItem?.isEnabled = true
+    collectionView.cellForItem(at: indexPath)?.backgroundColor = .systemIndigo
     print(readableCart)
   }
 

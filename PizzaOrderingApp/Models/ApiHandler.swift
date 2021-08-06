@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class ApiHandler {
 
@@ -15,6 +16,7 @@ class ApiHandler {
 
   var downloadedRestaurants: [Restaurant] = []
   var downloadedMenuItems: [MenuItem] = []
+  var userLocation: CLLocation?
 
   func loadRestaurants(completionHandler: @escaping RestaurantHandler) {
     let url = URL(string: "https://private-anon-94d7d533ab-pizzaapp.apiary-mock.com/restaurants/")!
@@ -32,6 +34,7 @@ class ApiHandler {
         print(pizzaPlace.name)
         self.downloadedRestaurants.append(pizzaPlace)
       }
+      downloadedRestaurants.sort(by: { $0.distance(to: userLocation!) < $1.distance(to: userLocation!) })
       completionHandler(.success(self.downloadedRestaurants))
     }
     task.resume()
@@ -87,7 +90,7 @@ class ApiHandler {
     }
     request.httpBody =
       """
-      //"{\n\"cart\": [\n    \(httpString)  ],\n  \"\(restaurantId)\": 1\n}
+      //"{\n\"cart\": [\n    \(httpString)  ],\n  \"restaurantId\":\(restaurantId)\n}
       """.data(using: .utf8)
 
     let task = URLSession.shared.dataTask(with: request) { data, response, error in

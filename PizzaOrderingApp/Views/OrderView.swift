@@ -106,18 +106,17 @@ class OrderView: UIViewController {
     newLabel.text = """
         OrderID: \(state.orderId)
         Sum: \(state.totalPrice)kr
-        Time: \(state.orderedAt)
-        ETA: \(state.esitmatedDelivery)
+        Time: \(state.formatDate(getDate: state.orderedAt))
+        ETA: \(state.formatDate(getDate: state.esitmatedDelivery))
         Status: \(state.status)
         """
     view.addSubview(newLabel)
 
     NSLayoutConstraint.activate([
-      newLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-      newLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+      newLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
       newLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-      newLabel.heightAnchor.constraint(equalToConstant: 300),
-      newLabel.widthAnchor.constraint(equalToConstant: 100)
+      newLabel.heightAnchor.constraint(equalToConstant: 100),
+      newLabel.widthAnchor.constraint(equalToConstant: 130)
 
     ])
   }
