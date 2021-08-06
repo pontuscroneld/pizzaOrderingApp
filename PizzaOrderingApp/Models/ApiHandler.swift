@@ -65,17 +65,6 @@ class ApiHandler {
 
   func placeOrder(restaurantId: Int, cart: [CartItem], completionHandler: @escaping OrderHandler){
 
-    var jsonDicts: [[String: Any]] = [[:]]
-
-    for item in cart {
-      var dict1 = ["menuItemId" :item.menuItemId]
-      var dict2 = ["quantity" :item.quantity]
-      jsonDicts.append(dict1)
-      jsonDicts.append(dict2)
-    }
-
-    let jsonData = try? JSONSerialization.data(withJSONObject: jsonDicts)
-
     let url = URL(string: "https://private-anon-8b3eb7f735-pizzaapp.apiary-mock.com/orders/")!
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
