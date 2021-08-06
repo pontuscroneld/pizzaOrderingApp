@@ -24,7 +24,6 @@ final class DetailView: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("OPENED DETAILVIEW")
 
     navigationItem.title = currentRestaurant?.name
     apiHandler = ApiHandler()
@@ -92,8 +91,7 @@ extension DetailView: UICollectionViewDelegate  {
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let chosenItem = dataSource.itemIdentifier(for: indexPath) else { return }
-    print(chosenItem.name)
+    guard var chosenItem = dataSource.itemIdentifier(for: indexPath) else { return }
     var itemToCart = CartItem(menuItemId: chosenItem.id, quantity: 1)
     var readableToCart = ReadableCartItem(name: chosenItem.name, quantity: 1)
     for item in cart {
@@ -112,10 +110,14 @@ extension DetailView: UICollectionViewDelegate  {
         }
       }
     }
+    if chosenItem.amount == nil {
+      chosenItem.amount = 1
+    } else {
+      chosenItem.amount = chosenItem.amount! + 1
+    }
     cart.append(itemToCart)
     readableCart.append(readableToCart)
     navigationItem.rightBarButtonItem?.isEnabled = true
-    collectionView.cellForItem(at: indexPath)?.backgroundColor = .systemIndigo
     print(readableCart)
   }
 
@@ -128,8 +130,6 @@ extension DetailView: UICollectionViewDelegate  {
     view.addSubview(collectionView)
   }
 
-
-
   func createLayout() -> UICollectionViewLayout {
     let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -138,10 +138,8 @@ extension DetailView: UICollectionViewDelegate  {
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
     let section = NSCollectionLayoutSection(group: group)
     let layout = UICollectionViewCompositionalLayout(section: section)
-
     return layout
   }
-
 
   func configureCollectionViewDataSource() {
     dataSource = DataSource(

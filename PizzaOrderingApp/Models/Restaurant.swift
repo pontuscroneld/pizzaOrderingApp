@@ -20,5 +20,4 @@ struct Restaurant: Codable, Hashable {
   func distance(to location: CLLocation) -> CLLocationDistance {
     return location.distance(from: CLLocation(latitude: self.latitude, longitude: self.longitude))
       }
-
 }

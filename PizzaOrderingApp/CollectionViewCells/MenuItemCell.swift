@@ -51,10 +51,19 @@ class MenuItemCell: UICollectionViewCell, SelfConfiguringCell {
     return button
   }()
 
+  lazy var amountLabel: UILabel = {
+    let label = UILabel()
+    return label
+  }()
+
   func configure(with item: MenuItem) {
     nameLabel.text = item.name
     priceLabel.text = String(item.price) + ":-"
-
+    if let amount = item.amount {
+      amountLabel.text = "x\(amount)"
+    } else {
+      amountLabel.text = "x0"
+    }
     setupView()
   }
 
@@ -69,9 +78,12 @@ class MenuItemCell: UICollectionViewCell, SelfConfiguringCell {
     clipsToBounds = true
     addSubview(nameLabel)
     addSubview(priceLabel)
+    addSubview(amountLabel)
 
     nameLabel.edgesToSuperview(excluding: .trailing, insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
     priceLabel.leadingToTrailing(of: nameLabel, offset: 8)
     priceLabel.centerY(to: nameLabel)
+    amountLabel.centerY(to: nameLabel)
+    amountLabel.edgesToSuperview(excluding: .leading, insets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
   }
 }

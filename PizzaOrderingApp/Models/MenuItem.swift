@@ -15,6 +15,7 @@ struct MenuItem: Codable, Hashable {
   var topping: [String]?
   var price: Int
   var rank: Int?
+  var amount: Int?
 
 }
 
